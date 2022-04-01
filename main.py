@@ -1,8 +1,8 @@
 from lexer import Lexer
 
-str = input()
+example_code = "a = 1"
 
-Lexer(str).run()
+tokens = Lexer(example_code).run()
 
-
-
+for i in tokens:
+    print(str(i))

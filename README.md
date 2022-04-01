@@ -7,3 +7,11 @@
 class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 문자열들은 전부 "" 로 통일합니다.
+
+## 문법
+
+> [number] ::= (1-9)(0-9)*
+
+> [identifier] ::= (a-zA-Z)+
+
+> [define] ::= [identifier] = [number] | [identifier]
