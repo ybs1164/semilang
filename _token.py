@@ -10,6 +10,12 @@ class Token:
         else:
             return f"type : {self.type}, value : {self.value}"
     
+    def __repr__(self):
+        if self.value == "":
+            return f"({self.type})"
+        else:
+            return f"({self.type}.{self.value})"
+    
     def check_type(self, type):
         return type == self.type
     

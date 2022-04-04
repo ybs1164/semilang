@@ -1,8 +1,10 @@
-from lexer import Lexer
+from _lexer import Lexer
+from _parser import Parser
+
 
 example_code = "a = 1"
 
 tokens = Lexer(example_code).run()
+print(tokens)
 
-for i in tokens:
-    print(str(i))
+ast = Parser(tokens)

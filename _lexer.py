@@ -1,4 +1,4 @@
-from token import Token
+from _token import Token
 
 
 # string concat
@@ -66,20 +66,13 @@ class Lexer:
                 self.next()
                 continue
             
-            id_token = self.identifier_token()
-            if id_token is not None:
-                self.token_list.append(id_token)
+            if safe_append(self.token_list, self.identifier_token()):
                 continue
             
-            num_token = self.number_token()
-            if num_token is not None:
-                self.token_list.append(num_token)
+            if safe_append(self.token_list, self.number_token()):
                 continue
             
-            letter_token = self.letter_token()
-            if letter_token is not None:
-                self.token_list.append(letter_token)
-
+            safe_append(self.token_list, self.letter_token())
             
         return self.token_list
 
