@@ -22,6 +22,8 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 > <stat> ::= <define>
 
+> <block> ::= <stat>+
+
 
 ## TODOist
 

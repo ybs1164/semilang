@@ -1,5 +1,5 @@
-from _lexer import Lexer
-from _parser import Parser
+from lib.lexer_ import Lexer
+from lib.parser_ import Parser
 
 
 example_code = "a = 1"

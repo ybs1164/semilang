@@ -1,9 +1,10 @@
-from _token import Token
+from .token_ import Token
 
 
 # string concat
 def append_str(str1, str2):
     return "".join((str1, str2))
+
 
 # lexer
 class Lexer:
