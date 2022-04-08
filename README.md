@@ -14,9 +14,9 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 ! 문법은 아직 완성되지 않았습니다. 문법에 대한 의견이 있다면 언제든지 제시 부탁드리겠습니다.
 
-    <number> ::= (1-9)(0-9)*
+    <number> ::= [0-9]+
 
-    <identifier> ::= (a-zA-Z)+
+    <identifier> ::= [a-zA-Z_][a-zA-Z_0-9]*
 
     <define> ::= <identifier> '=' <number> | <identifier>
 
@@ -29,3 +29,8 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 1. parser - define
 2. ast - define
+
+## Reference
+
+rply - https://github.com/alex/rply
+

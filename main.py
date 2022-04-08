@@ -1,10 +1,11 @@
-from lib.lexer_ import Lexer
+from lib.lexer_ import l
 from lib.parser_ import Parser
 
 
 example_code = "a = 1"
 
-tokens = Lexer(example_code).run()
-print(tokens)
+tokens = l.lex(example_code)
 
-ast = Parser(tokens)
+for token in tokens:
+    print(token)
+
