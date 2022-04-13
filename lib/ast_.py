@@ -1,29 +1,38 @@
+from rply.token import BaseBox
 
-class Define:
-    def __init__(self, name, body):
-        self.type = "define"
+
+class Number(BaseBox):
+    def __init__(self, value):
+        self.value = value
+
+    def eval(self):
+        return self.value
+
+class Ident(BaseBox):
+    def __init__(self, name):
         self.name = name
+
+    def eval(self):
+        return self.name
+
+class Define(BaseBox):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+    def eval(self):
+        return Define(self.left, self.right.eval())
+
+class Stat(BaseBox):
+    def __init__(self, body):
         self.body = body
-    
-    def __str__(self):
-        return f'{self.name} = {self.body}'
 
-class Block:
-    def __init__(self, stats):
-        self.type = "block"
-        self.stat_list = stats
-    
-    def __str__(self):
-        block_str = ""
-        for stat in self.stat_list:
-            "".join((block_str, str(stat)))
+    def eval(self):
+        return self.body.eval()
 
-        return block_str
+class Block(BaseBox):
+    def __init__(self, bodys):
+        self.bodys = bodys
 
-class Stat:
-    def __init__(self, stat):
-        self.type = "stat"
-        self.body = stat
-    
-    def __str__(self):
-        return str(self.body)
+    def eval(self):
+        return [body.eval() for body in self.bodys]

@@ -1,11 +1,14 @@
-from lib.lexer_ import l
-from lib.parser_ import Parser
+from lib.lexer_ import lexer
+from lib.parser_ import parser
 
 
 example_code = "a = 1"
 
-tokens = l.lex(example_code)
+tokens = lexer.lex(example_code)
 
 for token in tokens:
     print(token)
 
+ast = parser.parse(tokens)
+
+print(ast)

@@ -1,12 +1,12 @@
 from rply import LexerGenerator
 
-lexer = LexerGenerator()
+lg = LexerGenerator()
 
-lexer.add('NUMBER', r'\d+')
-lexer.add('EQUAL', r'=')
-lexer.add('IDENTIFIER', r'[\w^\d][\w]*')
+lg.add('NUMBER', r'\d+')
+lg.add('EQUAL', r'=')
+lg.add('IDENTIFIER', r'[\w^\d][\w]*')
 
 
-lexer.ignore(r'\s+')
+lg.ignore(r'\s+')
 
-l = lexer.build()
+lexer = lg.build()

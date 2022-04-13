@@ -1,36 +1,18 @@
-from .ast_ import *
+from rply import ParserGenerator
 
 
-def safe_append(list, value):
-    if value is not None:
-        list.append(value)
-        return True
-    return False
+pg = ParserGenerator(
+    ['NUMBER', 'EQUAL', 'IDENTIFIER'],
+    precedence=[
+    ]
+)
 
+@pg.production('define : IDENTIFIER EQUAL expr')
+def define(p):
+    return Define(p[0], p[2])
 
-class Parser:
-    def __init__(self, tokens):
-        self.token_list = tokens
-        self.index = 0
-        self.length = len(tokens)
+@pg.production('expr : NUMBER')
+def expr(p):
+    return Number(int(p[0].getstr()))
 
-        self.ast = None
-    
-    def define(self):
-        return
-
-    def stat(self):
-        self.define()
-        return
-
-    # <block> ::= <stat>+
-    def block(self):
-        stat_list = []
-        while self.index < self.length:
-            if not safe_append(stat_list, self.stat()):
-                break
-        
-        return Block(stat_list)
-    
-    def run(self):
-        return self.block()
+parser = pg.build()
