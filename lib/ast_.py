@@ -5,14 +5,14 @@ class Number(BaseBox):
     def __init__(self, value):
         self.value = value
 
-    def eval(self):
+    def getast(self):
         return self.value
 
-class Ident(BaseBox):
+class Identifier(BaseBox):
     def __init__(self, name):
         self.name = name
 
-    def eval(self):
+    def getast(self):
         return self.name
 
 class Define(BaseBox):
@@ -20,19 +20,22 @@ class Define(BaseBox):
         self.left = left
         self.right = right
 
-    def eval(self):
-        return Define(self.left, self.right.eval())
+    def getast(self):
+        return Define(self.left, self.right.getast())
 
 class Stat(BaseBox):
     def __init__(self, body):
         self.body = body
 
-    def eval(self):
-        return self.body.eval()
+    def getast(self):
+        return self.body.getast()
 
 class Block(BaseBox):
     def __init__(self, bodys):
         self.bodys = bodys
 
-    def eval(self):
-        return [body.eval() for body in self.bodys]
+    def getbodys(self):
+        return self.bodys
+
+    def getast(self):
+        return [body.getast() for body in self.bodys]

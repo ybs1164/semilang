@@ -2,12 +2,11 @@ from lib.lexer_ import lexer
 from lib.parser_ import parser
 
 
-example_code = "a = 1"
+example_code = "a is 1"
 
 tokens = lexer.lex(example_code)
 
-for token in tokens:
-    print(token)
+# print(list(lexer.lex(example_code)))
 
 ast = parser.parse(tokens)
 

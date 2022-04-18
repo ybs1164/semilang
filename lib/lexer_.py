@@ -1,10 +1,13 @@
 from rply import LexerGenerator
 
+
 lg = LexerGenerator()
 
+
+lg.add('IS', r'is')
+lg.add('IDENTIFIER', r'[a-zA-Z_][\w]*')
+lg.add('NEXTLINE', r'\n+')
 lg.add('NUMBER', r'\d+')
-lg.add('EQUAL', r'=')
-lg.add('IDENTIFIER', r'[\w^\d][\w]*')
 
 
 lg.ignore(r'\s+')

@@ -16,9 +16,11 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
     <block> ::= <stat>+
     
-    <stat> ::= <define>
+    <stat> ::= <define> '\n'
     
-    <define> ::= <identifier> '=' <number> | <identifier>
+    <define> ::= <identifier> 'is' <expr>
+
+    <expr> ::= <number> | <identifier>
     
     <number> ::= (0-9)+
     
@@ -28,8 +30,9 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 ## TODOist
 
-1. parser - define
-2. ast - define
+> C transpiler
+
+> `__repr__` implement of `ast_.py`
 
 ## Reference
 
