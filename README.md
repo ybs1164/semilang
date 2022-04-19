@@ -26,6 +26,9 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
     
     <identifier> ::= (a-z | A-Z | _)(a-z | A-Z | _ | 0-9)*
 
+## Notion Document
+
+https://www.notion.so/4bce2542163547fdb88e2a168efba270
 
 
 ## TODOist
