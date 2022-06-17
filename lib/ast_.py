@@ -4,21 +4,63 @@ from rply.token import BaseBox
 class Number(BaseBox):
     def __init__(self, value):
         self.value = value
+    
+    def __repr__(self):
+        return f'{self.value}'
 
     def getast(self):
-        return self.value
+        return Number(self.value)
 
 class Identifier(BaseBox):
     def __init__(self, name):
         self.name = name
+    
+    def __repr__(self):
+        return f'{self.name}'
 
     def getast(self):
-        return self.name
+        return Identifier(self.name)
+
+class BinaryOperator(BaseBox):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+class Add(BinaryOperator):
+    def __repr__(self):
+        return f'Add ({repr(self.left.getast())}, {repr(self.right.getast())})'
+
+    def getast(self):
+        return Add(self.left.getast(), self.right.getast())
+
+class Sub(BinaryOperator):
+    def __repr__(self):
+        return f'Sub ({repr(self.left.getast())}, {repr(self.right.getast())})'
+
+    def getast(self):
+        return Sub(self.left.getast(), self.right.getast())
+
+class Mul(BinaryOperator):
+    def __repr__(self):
+        return f'Mul ({repr(self.left.getast())}, {repr(self.right.getast())})'
+
+    def getast(self):
+        return Mul(self.left.getast(), self.right.getast())
+
+class Div(BinaryOperator):
+    def __repr__(self):
+        return f'Div ({repr(self.left.getast())}, {repr(self.right.getast())})'
+
+    def getast(self):
+        return Div(self.left.getast(), self.right.getast())
 
 class Define(BaseBox):
     def __init__(self, left, right):
         self.left = left
         self.right = right
+    
+    def __repr__(self):
+        return f'Define ({repr(self.left)}, {repr(self.right.getast())})'
 
     def getast(self):
         return Define(self.left, self.right.getast())

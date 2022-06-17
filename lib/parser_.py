@@ -3,9 +3,12 @@ from lib.ast_ import *
 
 
 pg = ParserGenerator(
-    ['NUMBER', 'IS', 'NEXTLINE', 'IDENTIFIER'],
+    ['NUMBER', 'IS', 'NEXTLINE', 'IDENTIFIER',
+     'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE'],
     precedence=[
-        ('right', ['IS'])
+        ('right', ['IS']),
+        ('left', ['PLUS', 'MINUS']),
+        ('left', ['MULTIPLY', 'DIVIDE'])
     ]
 )
 
@@ -28,15 +31,38 @@ def stat(p):
 def define(p):
     return Define(Identifier(p[0].getstr()), p[2])
 
+
 @pg.production('expr : NUMBER')
 @pg.production('expr : IDENTIFIER')
 def expr_num(p):
     if p[0].gettokentype() == 'NUMBER':
-        return Number(int(p[0].getstr()))
+        return Number(p[0].getstr())
     elif p[0].gettokentype() == 'IDENTIFIER':
         return Identifier(p[0].getstr())
     else:
         raise AssertionError('expr Error')
+
+@pg.production('binop : PLUS')
+@pg.production('binop : MINUS')
+@pg.production('binop : MULTIPLY')
+@pg.production('binop : DIVIDE')
+def binop(p):
+    return p[0]
+
+@pg.production('expr : expr binop expr')
+def expr_binop(p):
+    left = p[0]
+    right = p[2]
+    if p[1].gettokentype() == 'PLUS':
+        return Add(left, right)
+    elif p[1].gettokentype() == 'MINUS':
+        return Sub(left, right)
+    elif p[1].gettokentype() == 'MULTIPLY':
+        return Mul(left, right)
+    elif p[1].gettokentype() == 'DIVIDE':
+        return Div(left, right)
+    else:
+        raise AssertionError('binop Error')
 
 @pg.error
 def error_handler(token):
