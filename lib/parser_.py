@@ -58,16 +58,12 @@ def expr_num(p):
     else:
         raise AssertionError('expr Error')
 
-@pg.production('binop : PLUS')
-@pg.production('binop : MINUS')
-@pg.production('binop : MULTIPLY')
-@pg.production('binop : DIVIDE')
-@pg.production('binop : LT')
-@pg.production('binop : GT')
-def binop(p):
-    return p[0]
-
-@pg.production('expr : expr binop expr')
+@pg.production('expr : expr LT expr')
+@pg.production('expr : expr GT expr')
+@pg.production('expr : expr PLUS expr')
+@pg.production('expr : expr MINUS expr')
+@pg.production('expr : expr MULTIPLY expr')
+@pg.production('expr : expr DIVIDE expr')
 def expr_binop(p):
     left = p[0]
     right = p[2]
