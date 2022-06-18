@@ -26,6 +26,20 @@ class BinaryOperator(BaseBox):
         self.left = left
         self.right = right
 
+class Lessthan(BinaryOperator):
+    def __repr__(self):
+        return f'Lessthan ({repr(self.left.getast())}, {repr(self.right.getast())})'
+    
+    def getast(self):
+        return Lessthan(self.left.getast(), self.right.getast())
+
+class Greaterthan(BinaryOperator):
+    def __repr__(self):
+        return f'Greaterthan ({repr(self.left.getast())}, {repr(self.right.getast())})'
+    
+    def getast(self):
+        return Greaterthan(self.left.getast(), self.right.getast())
+
 class Add(BinaryOperator):
     def __repr__(self):
         return f'Add ({repr(self.left.getast())}, {repr(self.right.getast())})'
@@ -53,6 +67,28 @@ class Div(BinaryOperator):
 
     def getast(self):
         return Div(self.left.getast(), self.right.getast())
+
+class If(BaseBox):
+    def __init__(self, expr, block, other):
+        self.expr = expr
+        self.block = block
+        self.other = other
+    
+    def __repr__(self):
+        return f'If ({repr(self.expr)}, {repr(self.block)}, {repr(self.other)})'
+    
+    def getast(self):
+        return If(self.expr.getast(), self.block.getast(), self.other.getast())
+
+class Print(BaseBox):
+    def __init__(self, value):
+        self.value = value
+    
+    def __repr__(self):
+        return f'Print ({repr(self.value)})'
+
+    def getast(self):
+        return Print(self.value)
 
 class Define(BaseBox):
     def __init__(self, left, right):

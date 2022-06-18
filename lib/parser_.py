@@ -3,10 +3,13 @@ from lib.ast_ import *
 
 
 pg = ParserGenerator(
-    ['NUMBER', 'IS', 'NEXTLINE', 'IDENTIFIER',
-     'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE'],
+    ['NUMBER', 'IDENTIFIER',
+     'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
+     'IS', 'PRINT', 'IF', 'THEN', 'ELSE', 'END',
+     'LT', 'GT'],
     precedence=[
-        ('right', ['IS']),
+        ('right', ['IS', 'PRINT', 'IF']),
+        ('left', ['LT', 'GT']),
         ('left', ['PLUS', 'MINUS']),
         ('left', ['MULTIPLY', 'DIVIDE'])
     ]
@@ -22,8 +25,9 @@ def block_next(p):
 def block_next(p):
     return Block([p[0]])
 
-@pg.production('stat : define NEXTLINE')
 @pg.production('stat : define')
+@pg.production('stat : print')
+@pg.production('stat : if')
 def stat(p):
     return p[0]
 
@@ -31,6 +35,18 @@ def stat(p):
 def define(p):
     return Define(Identifier(p[0].getstr()), p[2])
 
+@pg.production('print : PRINT expr')
+def print(p):
+    return Print(p[1])
+
+@pg.production('if : IF expr THEN block elseif')
+def if_(p):
+    return If(p[1], p[3], p[4])
+
+@pg.production('elseif : ELSE if')
+@pg.production('elseif : ELSE block END')
+def elseif_(p):
+    return p[1]
 
 @pg.production('expr : NUMBER')
 @pg.production('expr : IDENTIFIER')
@@ -46,6 +62,8 @@ def expr_num(p):
 @pg.production('binop : MINUS')
 @pg.production('binop : MULTIPLY')
 @pg.production('binop : DIVIDE')
+@pg.production('binop : LT')
+@pg.production('binop : GT')
 def binop(p):
     return p[0]
 
@@ -53,14 +71,16 @@ def binop(p):
 def expr_binop(p):
     left = p[0]
     right = p[2]
-    if p[1].gettokentype() == 'PLUS':
-        return Add(left, right)
-    elif p[1].gettokentype() == 'MINUS':
-        return Sub(left, right)
-    elif p[1].gettokentype() == 'MULTIPLY':
-        return Mul(left, right)
-    elif p[1].gettokentype() == 'DIVIDE':
-        return Div(left, right)
+    class_list = {
+        'PLUS': Add,
+        'MINUS': Sub,
+        'MULTIPLY': Mul,
+        'DIVIDE': Div,
+        'LT': Lessthan,
+        'GT': Greaterthan
+    }
+    if p[1].gettokentype() in class_list:
+        return class_list[p[1].gettokentype()](left, right)
     else:
         raise AssertionError('binop Error')
 
