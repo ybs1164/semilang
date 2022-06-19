@@ -20,7 +20,7 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
     
     <print> ::= 'print' <expr>
     
-    <if> ::= 'if' <expr> 'then' <block> ('else if' <expr> then <block>)* ('else' <block>) 'end'
+    <if> ::= 'if' <expr> 'then' <block> ('else' <if>) 'else' <block> 'end'
 
     <expr> ::= <number> | <identifier> | <expr> <binop> <expr>
     
