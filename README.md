@@ -2,15 +2,18 @@
 
 본 semilang(세미랭)은 **일반인을 위한 프로그래밍 언어**입니다.
 
+
 ## 개발 기여 규칙
 
 변수, 함수명들은 전부 snail_case 로 작성해주세요.
 
 class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
+
 ## 문법
 
-! 문법은 아직 완성되지 않았습니다. 문법에 대한 의견이 있다면 언제든지 제시 부탁드리겠습니다.
+문법은 아직 완성되지 않았습니다. 문법에 대한 의견이 있다면 언제든지 제시 부탁드리겠습니다.
+아래에 표기된 문법은 현재 구현되어야 할 문법들입니다. 구현된 문법들은 Notion 문서를 참고해주세요.
 
     <block> ::= <stat>+
     
@@ -22,17 +25,27 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
     
     <if> ::= 'if' <expr> 'then' <block> ('else' <if>) 'else' <block> 'end'
 
-    <expr> ::= <number> | <identifier> | <expr> <binop> <expr>
+    <expr> ::= <number> | <string> | <function> | <prexpr> | <expr> <binop> <expr>
     
-    <binop> ::= '+' | '-' | '*' | '/' | '<' | '>' | '<=' | '>=' | '==' | '!='
+    <function> ::= 'function' '(' <identifier> ')' <block> 'end'
+
+    <prexpr> ::= <identifier> | '(' <expr> ')'
+
+    <application> ::= <prexpr> | '(' <expr> ')'
+    
+    <binop> ::= '+' | '-' | '*' | '/' | '<' | '>' | '<=' | '>=' | '==' | '!=' | 'and' | 'or'
+
+    <string> ::= '"' %s '"'
     
     <number> ::= [0-9]+
     
     <identifier> ::= [a-z | A-Z | _][a-z | A-Z | _ | 0-9]*
 
+
 ## Notion Document
 
 https://www.notion.so/4bce2542163547fdb88e2a168efba270
+
 
 ## 실행 방법
 
