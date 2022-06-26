@@ -1,6 +1,10 @@
 from lib.lexer_ import lexer
 from lib.parser_ import parser
 
+from lib.trans_ import code
+
+import pathlib
+
 
 example_code = '''
 a is 1
@@ -25,3 +29,9 @@ tokens = lexer.lex(example_code_2)
 ast = parser.parse(tokens)
 
 print(ast.getast())
+
+print(code(ast))
+
+file = open(''.join([str(pathlib.Path().resolve()), '/test.c']), 'w')
+file.write(code(ast))
+file.close()
