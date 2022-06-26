@@ -5,26 +5,11 @@ from lib.trans_ import code
 
 import pathlib
 
+file_dir = "/cases/if_1.semi"
 
-example_code = '''
-a is 1
-b is 2 + 1 * 3
-print a + b
-'''
-
-example_code_2 = '''
-a is 10
-b is 20
-if a+b > 10 then
-  print a*b
-else
-  print b-a
-end
-'''
-
-tokens = lexer.lex(example_code_2)
-
-# print(list(lexer.lex(example_code)))
+input_file = open(''.join([str(pathlib.Path().resolve()), file_dir]), 'r')
+tokens = lexer.lex('\n'.join(input_file.readlines()))
+input_file.close()
 
 ast = parser.parse(tokens)
 

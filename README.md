@@ -34,12 +34,29 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 
 https://www.notion.so/4bce2542163547fdb88e2a168efba270
 
+## 실행 방법
+
+직접 돌려보고픈 분들을 위해 가이드라인을 간단하게라도 작성해보겠습니다.
+
+일단 제가 돌려본 환경은 `wsl2 ubuntu`이므로, 안돌아간다면 저에게 연락을 남겨주시면 감사하겠습니다.
+
+1. `python3`, `pip3`을 깔아주셔야 하고, `pip3 install rply`로 `rply`라이브러리를 다운받으시면 됩니다.
+
+2. `main.py`의 `file_dir`변수에 돌려보고 싶은 파일의 경로를 적어주시면 됩니다.
+
+3. `python3 main.py`로 `main.py`를 실행시키시면 `test.c`파일이 생성될 것입니다.
+
+4. 이제 `gcc`나 `clang`으로 `test.c`파일을 돌려보시면 됩니다.
+
 
 ## TODOist
 
-> C transpiler
+> impl function
 
-> `__repr__` implement of `ast_.py`
+> impl string
+
+> impl float
+
 
 ## Reference
 

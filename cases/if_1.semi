@@ -1,0 +1,7 @@
+a is 10
+b is 20
+if a+b > 10 then
+  print a*b
+else
+  print b-a
+end
