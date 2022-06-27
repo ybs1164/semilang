@@ -18,4 +18,4 @@ fi
 poetry install
 clear
 echo "setup.sh 작업이 완료되었습니다"
-echo "./run.sh 또는 poetry run semilang을 통해 semilang을 실행할 수 있습니다"
+echo "semilang --help로 사용법을 검색해보세요"
