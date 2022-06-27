@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "semilang"
+version = "0.1.0"
+description = "일반인을 위한 언어, 세미랭"
+authors = ["ybs1164"]
+license = "MIT"
+
+packages = [ { include = "./lib" } ]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pretty-errors = "^1.2.25"
+
+[tool.poetry.dev-dependencies]
+rply = "^0.7.8"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+semilang = "src.semilang:start"
