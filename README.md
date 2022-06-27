@@ -29,9 +29,9 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
     
     <function> ::= 'function' '(' <identifier> ')' <block> 'end'
 
-    <prexpr> ::= <identifier> | '(' <expr> ')'
+    <prexpr> ::= <identifier> | <application> | '(' <expr> ')'
 
-    <application> ::= <prexpr> | '(' <expr> ')'
+    <application> ::= <prexpr> '(' <expr> ')'
     
     <binop> ::= '+' | '-' | '*' | '/' | '<' | '>' | '<=' | '>=' | '==' | '!=' | 'and' | 'or'
 
