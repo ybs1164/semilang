@@ -23,8 +23,8 @@ lg.add('MINUS', r'\-')
 lg.add('MULTIPLY', r'\*')
 lg.add('DIVIDE', r'\\')
 
-lg.add('LPAREN', r'(')
-lg.add('RPAREN', r')')
+lg.add('LPAREN', r'\(')
+lg.add('RPAREN', r'\)')
 
 lg.add('EQ', r'==')
 lg.add('NEQ', r'!=')
