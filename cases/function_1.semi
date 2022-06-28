@@ -1,4 +1,4 @@
-factorial = function (a) 
+factorial is function (a) 
     if a > 1 then
         return a * factorial (a - 1)
     else

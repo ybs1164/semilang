@@ -14,7 +14,9 @@ lg.add('ELSE', r'else')
 lg.add('END', r'end')
 lg.add('PRINT', r'print')
 lg.add('FUNCTION', r'function')
+lg.add('RETURN', r'return')
 
+lg.add('STRING', r'\"^\"+\"')
 lg.add('IDENTIFIER', r'[a-zA-Z_][\w]*')
 lg.add('NUMBER', r'\d+')
 

@@ -15,9 +15,11 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
 문법은 아직 완성되지 않았습니다. 문법에 대한 의견이 있다면 언제든지 제시 부탁드리겠습니다.
 아래에 표기된 문법은 현재 구현되어야 할 문법들입니다. 구현된 문법들은 Notion 문서를 참고해주세요.
 
-    <block> ::= <stat>+
+    <block> ::= <stat>+ <laststat>?
     
     <stat> ::= <define> | <print> | <if>
+
+    <laststat> ::= 'return' <expr>
     
     <define> ::= <identifier> 'is' <expr>
     
