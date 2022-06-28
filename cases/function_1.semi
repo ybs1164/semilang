@@ -1,0 +1,9 @@
+factorial = function (a) 
+    if a > 1 then
+        return a * factorial (a - 1)
+    else
+        return 1
+    end
+end
+
+print (factorial (10))

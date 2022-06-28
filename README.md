@@ -53,13 +53,12 @@ https://www.notion.so/4bce2542163547fdb88e2a168efba270
 
 일단 제가 돌려본 환경은 `wsl2 ubuntu`이므로, 안돌아간다면 저에게 연락을 남겨주시면 감사하겠습니다.
 
-1. `python3`, `pip3`을 깔아주셔야 하고, `pip3 install rply`로 `rply`라이브러리를 다운받으시면 됩니다.
+1. `python3 (>=3.9)`, `pip3`을 깔아주셔야 하고, `poetry`를 통해 관련 라이브러리들을 다운받아주시면 됩니다.
 
-2. `main.py`의 `file_dir`변수에 돌려보고 싶은 파일의 경로를 적어주시면 됩니다.
+2. `./semilang --help`또는 `poetry run semilang --help`를 통해 사용법을 확인해주세요.
 
-3. `python3 main.py`로 `main.py`를 실행시키시면 `test.c`파일이 생성될 것입니다.
+3. 사용법을 읽어주시고, `./semilang [args]`또는 `poetry run semilang [args]`를 통해 `semilang`을 사용해보시면 됩니다.
 
-4. 이제 `gcc`나 `clang`으로 `test.c`파일을 돌려보시면 됩니다.
 
 
 ## TODOist
