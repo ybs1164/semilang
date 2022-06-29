@@ -13,7 +13,7 @@ lg.add('THEN', r'then')
 lg.add('ELSE', r'else')
 lg.add('END', r'end')
 lg.add('PRINT', r'print')
-lg.add('FUNCTION', r'function')
+lg.add('FUNCTION', r'fn')
 lg.add('RETURN', r'return')
 
 lg.add('STRING', r'\"^\"+\"')

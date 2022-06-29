@@ -1,0 +1,10 @@
+created_hp = fn (hp) {
+    return fn (damage) {
+        hp = hp - damage
+        return hp
+    }
+}
+
+damaged = created_hp (10)
+
+print (damaged (1))

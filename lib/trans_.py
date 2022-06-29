@@ -4,6 +4,8 @@ def concat(*a):
     return ''.join(a)
 
 def code(ast):
+    # code, header_list = translate(ast)
+
     code = "#include <stdio.h>\n\n"
     code = concat(code, "int main(void)")
     code = concat(code, translate(ast))
@@ -20,22 +22,26 @@ def translate(ast, indent=0):
         code = concat(code, f"int {translate(ast.left, indent)} = {translate(ast.right, indent)};")
     elif type(ast) is Print:
         code = concat(code, f'printf("%d\\n", {translate(ast.value, indent)});')
+    elif type(ast) is Function:
+        pass
     elif type(ast) is If:
         code = concat(code, f"if ({translate(ast.expr, indent)})")
         code = concat(code, translate(ast.block, indent), " else")
         code = concat(code, translate(ast.other, indent))
-    elif type(ast) is Add:
-        code = f"{translate(ast.left, indent)} + {translate(ast.right, indent)}"
-    elif type(ast) is Sub:
-        code = f"{translate(ast.left, indent)} - {translate(ast.right, indent)}"
-    elif type(ast) is Mul:
-        code = f"{translate(ast.left, indent)} * {translate(ast.right, indent)}"
-    elif type(ast) is Div:
-        code = f"{translate(ast.left, indent)} / {translate(ast.right, indent)}"
-    elif type(ast) is Lessthan:
-        code = f"{translate(ast.left, indent)} > {translate(ast.right, indent)}"
-    elif type(ast) is Greaterthan:
-        code = f"{translate(ast.left, indent)} < {translate(ast.right, indent)}"
+    elif issubclass(ast, BinaryOperator):
+        bin_op_list = {
+            Add: '+',
+            Sub: '-',
+            Mul: '*',
+            Div: '/',
+            Lessthan: '<',
+            Greaterthan: '>',
+            LessthanEqual: '<=',
+            GreaterthanEqual: '>=',
+            Equal: '==',
+            NotEqual: '!='
+        }
+        code = f"{translate(ast.left, indent)} {bin_op_list[type(ast)]} {translate(ast.right, indent)}"
     elif type(ast) is Number:
         code = f"{ast.value}"
     elif type(ast) is Identifier:

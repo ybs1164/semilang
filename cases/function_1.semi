@@ -1,4 +1,4 @@
-factorial is function (a) 
+factorial is fn (a) 
     if a > 1 then
         return a * factorial (a - 1)
     else

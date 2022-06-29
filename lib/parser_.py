@@ -1,4 +1,3 @@
-from lib2to3.pgen2.token import STRING
 from rply import ParserGenerator
 from lib.ast_ import *
 
@@ -36,25 +35,29 @@ def stat(p):
 def laststat(p):
     return Return(p[1])
 
-@pg.production('define : IDENTIFIER IS expr')
+@pg.production('define : IDENTIFIER is')
 def define(p):
-    return Define(Identifier(p[0].getstr()), p[2])
+    return Define(Identifier(p[0].getstr()), p[1])
+
+@pg.production('is : IS expr')
+def is_(p):
+    return p[1]
 
 @pg.production('print : PRINT expr')
 def print(p):
     return Print(p[1])
 
-@pg.production('if : IF expr THEN block ELSE elseif')
+@pg.production('if : IF expr then elseif')
 def if_(p):
-    return If(p[1], p[3], p[5])
+    return If(p[1], p[2], p[3])
+
+@pg.production('then : THEN block ELSE')
+def then_(p):
+    return p[1]
 
 @pg.production('elseif : if')
 @pg.production('elseif : block END')
 def elseif_(p):
-    return p[0]
-
-@pg.production('expr : function')
-def expr_function(p):
     return p[0]
 
 @pg.production('expr : NUMBER')
@@ -66,6 +69,10 @@ def expr_num(p):
         return String(p[0].getstr())
     else:
         raise AssertionError('expr Error')
+
+@pg.production('expr : function')
+def expr_function(p):
+    return p[0]
 
 @pg.production('expr : prexpr')
 def expr_pr(p):

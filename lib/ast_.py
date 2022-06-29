@@ -166,7 +166,6 @@ class Return(BaseBox):
 class Function(BaseBox):
     def __init__(self, arguments, block):
         self.arguments = arguments
-        print(block)
         self.block = block
     
     def __repr__(self):
@@ -186,19 +185,15 @@ class Define(BaseBox):
     def getast(self):
         return Define(self.left, self.right.getast())
 
-class Stat(BaseBox):
-    def __init__(self, body):
-        self.body = body
-
-    def getast(self):
-        return self.body.getast()
-
 class Block(BaseBox):
     def __init__(self, bodys):
         self.bodys = bodys
+    
+    def __repr__(self):
+        return '\n'.join([f'{body.getast()}' for body in self.bodys])
 
     def getbodys(self):
         return self.bodys
 
     def getast(self):
-        return [body.getast() for body in self.bodys]
+        return Block([body.getast() for body in self.bodys])
