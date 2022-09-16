@@ -5,25 +5,29 @@ from lib.ast_ import *
 pg = ParserGenerator(
     ['NUMBER', 'STRING', 'IDENTIFIER',
      'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE',
-     'IS', 'PRINT', 'IF', 'THEN', 'ELSE', 'END',
+     'IS', 'IF', 'THEN', 'ELSEIF', 'ELSE', 'END', 'PRINT',
      'FUNCTION', 'RETURN', 'AND', 'OR', 'LPAREN', 'RPAREN',
      'EQ', 'NEQ', 'LTE', 'GTE', 'LT', 'GT'],
     precedence=[
-        ('right', ['IS']),
+        ('left', ['IF']),
+        ('left', ['ELSE']),
+        ('left', ['PRINT']),
+        ('left', ['IDENTIFIER']),
         ('left', ['AND', 'OR', 'EQ', 'NEQ', 'LTE', 'GTE', 'LT', 'GT']),
         ('left', ['PLUS', 'MINUS']),
         ('left', ['MULTIPLY', 'DIVIDE'])
     ]
 )
 
-@pg.production('block : block block')
-def block_next(p):
-    return Block([*p[0].getbodys(), *p[1].getbodys()])
-
 @pg.production('block : stat')
 @pg.production('block : laststat')
 def block_next(p):
     return Block([p[0]])
+
+@pg.production('block : stat block')
+def block_next(p):
+    return Block([p[0], *p[1].getbodys()])
+
 
 @pg.production('stat : define')
 @pg.production('stat : print')
@@ -35,30 +39,27 @@ def stat(p):
 def laststat(p):
     return Return(p[1])
 
-@pg.production('define : IDENTIFIER is')
+@pg.production('define : IDENTIFIER IS expr')
 def define(p):
-    return Define(Identifier(p[0].getstr()), p[1])
-
-@pg.production('is : IS expr')
-def is_(p):
-    return p[1]
+    return Define(Identifier(p[0].getstr()), p[2])
 
 @pg.production('print : PRINT expr')
 def print(p):
     return Print(p[1])
 
-@pg.production('if : IF expr then elseif')
+@pg.production('if : IF if_')
 def if_(p):
-    return If(p[1], p[2], p[3])
-
-@pg.production('then : THEN block ELSE')
-def then_(p):
     return p[1]
 
-@pg.production('elseif : if')
-@pg.production('elseif : block END')
-def elseif_(p):
-    return p[0]
+@pg.production('if_ : expr THEN block ELSE block END')
+@pg.production('if_ : expr THEN block ELSEIF if_')
+def if__(p):
+    return If(p[0], p[2], p[4])
+
+# @pg.production('elseif : if')
+# @pg.production('elseif : block END')
+# def elseif_(p):
+#     return p[0]
 
 @pg.production('expr : NUMBER')
 @pg.production('expr : STRING')
@@ -71,11 +72,8 @@ def expr_num(p):
         raise AssertionError('expr Error')
 
 @pg.production('expr : function')
-def expr_function(p):
-    return p[0]
-
 @pg.production('expr : prexpr')
-def expr_pr(p):
+def expr(p):
     return p[0]
 
 @pg.production('function : FUNCTION LPAREN IDENTIFIER RPAREN block END')

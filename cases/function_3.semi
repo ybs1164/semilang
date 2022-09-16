@@ -1,0 +1,14 @@
+add is fn (a, b)
+    return a + b
+end
+
+sub is fn (a, b)
+    return a - b
+end
+
+calculate is fn (f, a, b)
+    return f(a, b)
+end
+
+print (calculate(add, 1, 2))
+print (calculate(sub, 2, 1))

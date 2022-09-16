@@ -25,7 +25,7 @@ class 명들은 전부 UpperCamelCase 로 작성해주세요.
     
     <print> ::= 'print' <expr>
     
-    <if> ::= 'if' <expr> 'then' <block> ('else' <if>) 'else' <block> 'end'
+    <if> ::= 'if' <expr> 'then' <block> ('elseif' <if>)* 'else' <block> 'end'
 
     <expr> ::= <number> | <string> | <function> | <prexpr> | <expr> <binop> <expr>
     
@@ -51,7 +51,7 @@ https://www.notion.so/4bce2542163547fdb88e2a168efba270
 
 ## 실행 방법
 
-직접 돌려보고픈 분들을 위해 가이드라인을 간단하게라도 작성해보겠습니다.
+직접 돌려보고픈 분들을 위해 가이드라인을 간단하게라도 작성했습니다.
 
 일단 제가 돌려본 환경은 `wsl2 ubuntu`이므로, 안돌아간다면 저에게 연락을 남겨주시면 감사하겠습니다.
 
@@ -67,9 +67,7 @@ https://www.notion.so/4bce2542163547fdb88e2a168efba270
 
 > impl function
 
-> impl string
-
-> impl float
+> impl integer calculate
 
 
 ## Reference

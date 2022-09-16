@@ -10,6 +10,7 @@ lg.add('OR', r'or')
 
 lg.add('IF', r'if')
 lg.add('THEN', r'then')
+lg.add('ELSEIF', r'elseif')
 lg.add('ELSE', r'else')
 lg.add('END', r'end')
 lg.add('PRINT', r'print')

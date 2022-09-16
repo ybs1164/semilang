@@ -126,7 +126,7 @@ class Application(BaseBox):
         self.arguments = arguments
     
     def __repr__(self):
-        return f'{repr(self.name)}({repr(self.arguments)})'
+        return f'{repr(self.name)} ({repr(self.arguments)})'
     
     def getast(self):
         return Application(self.name.getast(), self.arguments.getast())

@@ -1,10 +1,10 @@
-created_hp = fn (hp) {
-    return fn (damage) {
-        hp = hp - damage
+created_hp is fn (hp)
+    return fn (damage)
+        hp is hp - damage
         return hp
-    }
-}
+    end
+end
 
-damaged = created_hp (10)
+damaged is created_hp (10)
 
 print (damaged (1))

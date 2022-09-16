@@ -11,6 +11,8 @@ def code(ast):
     code = concat(code, translate(ast))
     return code
 
+
+
 def translate(ast, indent=0):
     code = "\t" * indent
     if type(ast) is Block:
@@ -39,7 +41,9 @@ def translate(ast, indent=0):
             LessthanEqual: '<=',
             GreaterthanEqual: '>=',
             Equal: '==',
-            NotEqual: '!='
+            NotEqual: '!=',
+            And: '&&',
+            Or: '||'
         }
         code = f"{translate(ast.left, indent)} {bin_op_list[type(ast)]} {translate(ast.right, indent)}"
     elif type(ast) is Number:
