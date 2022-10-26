@@ -4,9 +4,10 @@ def concat(*a):
     return ''.join(a)
 
 def code(ast):
-    # code, header_list = translate(ast)
+    code = ""
 
     code = "#include <stdio.h>\n\n"
+    code = concat(code, '#include "./frunzik/src/frunzik.h"\n\n')
     code = concat(code, "int main(void)")
     code = concat(code, translate(ast))
     return code

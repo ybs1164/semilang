@@ -1,0 +1,3 @@
+[submodule "frunzik"]
+	path = frunzik
+	url = https://github.com/ybs1164/frunzik.git
